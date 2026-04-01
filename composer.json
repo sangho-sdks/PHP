@@ -1,0 +1,36 @@
+{
+  "name": "sangho/sdk",
+  "description": "Sangho PHP SDK — XAF-first payment platform for Africa",
+  "type": "library",
+  "license": "MIT",
+  "version": "1.0.0",
+  "authors": [
+    { "name": "Sangho", "email": "dev@sangho.com" }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "guzzlehttp/guzzle": "^7.0",
+    "ramsey/uuid": "^4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0",
+    "mockery/mockery": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sangho\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sangho\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "lint": "phpcs --standard=PSR12 lib/ tests/"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
