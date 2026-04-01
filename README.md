@@ -1,51 +1,54 @@
 # Sangho PHP SDK
 
-Official PHP SDK for the [Sangho](https://sangho.com) payment platform.
+SDK officiel PHP pour l'API [Sangho](https://sangho.com) — paiements XAF pour l'Afrique.
+
+[![Packagist](https://img.shields.io/packagist/v/sangho/sangho-php.svg)](https://packagist.org/packages/sangho/sangho-php)
+[![CI](https://github.com/sangho-sdks/sangho-php/actions/workflows/ci.yml/badge.svg)](https://github.com/sangho-sdks/sangho-php/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
 
 ## Installation
 
 ```bash
-composer require sangho/sdk
+composer require sangho/sangho-php
 ```
 
-## Quick Start
+## Quickstart
 
 ```php
-<?php
-use Sangho\SanghoClient;
+use Sangho\Sangho;
 
-$sangho = new SanghoClient('sk_test_xxx');
+$client = new Sangho('sk_live_...');
 
-// Create a customer
-$customer = $sangho->customers->create([
-    'email' => 'jean@example.com',
-    'name'  => 'Jean Ondo',
+// Créer un payment intent
+$intent = $client->paymentIntents->create([
+    'amount'   => 5000,
+    'currency' => 'XAF',
+    'customer' => 'cust_xxx',
 ]);
 
-// Create a payment intent
-$intent = $sangho->paymentIntents->create([
-    'amount'   => 25000,
-    'customer' => $customer['id'],
-]);
-
-// Confirm
-$confirmed = $sangho->paymentIntents->confirm($intent['id']);
+echo $intent->id;
 ```
 
-## Webhook Verification
+## Documentation
 
-```php
-<?php
-use Sangho\Resource\Webhooks;
+La documentation complète est disponible sur [docs.sangho.africa](https://docs.sangho.africa).
 
-$event = Webhooks::constructEvent(
-    payload: file_get_contents('php://input'),
-    signatureHeader: $_SERVER['HTTP_SANGHO_SIGNATURE'],
-    secret: 'whsec_xxx',
-);
-```
+## Ressources disponibles
 
-## Requirements
+`apps` · `customers` · `products` · `paymentIntents` · `checkoutSessions` ·
+`invoices` · `transactions` · `refunds` · `subscriptions` · `paymentMethods` ·
+`webhooks` · `paymentLinks` · `addresses` · `partners`
 
-- PHP 8.1+
-- Guzzle 7+
+## Contribuer
+
+Voir [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Changelog
+
+Voir [CHANGELOG.md](CHANGELOG.md).
+
+## Licence
+
+MIT
